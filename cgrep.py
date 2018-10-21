@@ -25,6 +25,5 @@ if __name__ == '__main__':
   args = parseArguments()
   regex = re.compile(args.regex)
   color = args.color
-  sys.stdin.reconfigure(encoding='utf-8')
   for line in sys.stdin:
     print(replace_color(regex, line, color), end='')
