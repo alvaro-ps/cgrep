@@ -5,6 +5,9 @@ import re
 import argparse 
 
 from termcolor import colored
+
+if sys.version_info < (3, 0, 0):
+    from __future__ import print_function
  
 def parseArguments(): 
   parser = argparse.ArgumentParser('cgrep') 
