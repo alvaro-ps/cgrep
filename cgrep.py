@@ -23,7 +23,7 @@ def parse_arguments():
     ) 
     return parser.parse_args(sys.argv[1:]) 
   
-def replace_color(regex, string, color): 
+def replace_color(string, regex, color):
     str_list = regex.findall(string) 
     for str_color in str_list: 
         new_string = string.replace(str_color, colored(str_color, color))
@@ -37,4 +37,4 @@ if __name__ == '__main__':
     colors = args.colors
     for line in sys.stdin:
         for regex, color in zip(regexes, colors):
-            print(replace_color(regex, line, color), end='')
+            print(replace_color(line, regex, color), end='')
