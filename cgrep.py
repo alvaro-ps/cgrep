@@ -24,17 +24,28 @@ def parse_arguments():
     return parser.parse_args(sys.argv[1:]) 
   
 def replace_color(string, regex, color):
+    """Given a string, a regex and a color, this function returns
+    the same string with the regex matches colored in the specified color.
+    """
     str_list = regex.findall(string) 
     for str_color in str_list: 
         new_string = string.replace(str_color, colored(str_color, color))
         string = new_string 
       
-        return string 
+    return string 
+
+def replace_colors(string, regexes, colors):
+    """Given a string, a list of regexes and a list of colors, this function
+    returns the same string with the regex matches colored in the specified colors.
+    """
+    for regex, color in zip(regexes, colors):
+        string = replace_color(string, regex, color)
+    return string
+
 
 if __name__ == '__main__':
     args = parse_arguments()
     regexes = [re.compile(regex) for regex in args.regexes]
     colors = args.colors
     for line in sys.stdin:
-        for regex, color in zip(regexes, colors):
-            print(replace_color(line, regex, color), end='')
+        print(replace_colors(line, regexes, colors), end='')
